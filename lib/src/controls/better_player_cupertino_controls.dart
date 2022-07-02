@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 class BetterPlayerCupertinoControls extends StatefulWidget {
   ///Callback used to send information if player bar is hidden or not
   final Function(bool visbility) onControlsVisibilityChanged;
+  final Function isBackArrowPressed;
 
   ///Controls config
   final BetterPlayerControlsConfiguration controlsConfiguration;
@@ -20,6 +21,7 @@ class BetterPlayerCupertinoControls extends StatefulWidget {
   const BetterPlayerCupertinoControls({
     required this.onControlsVisibilityChanged,
     required this.controlsConfiguration,
+    required this.isBackArrowPressed,
     Key? key,
   }) : super(key: key);
 
@@ -29,8 +31,7 @@ class BetterPlayerCupertinoControls extends StatefulWidget {
   }
 }
 
-class _BetterPlayerCupertinoControlsState
-    extends BetterPlayerControlsState<BetterPlayerCupertinoControls> {
+class _BetterPlayerCupertinoControlsState extends BetterPlayerControlsState<BetterPlayerCupertinoControls> {
   final marginSize = 5.0;
   VideoPlayerValue? _latestValue;
   double? _latestVolume;
@@ -490,16 +491,28 @@ class _BetterPlayerCupertinoControlsState
       ),
       child: Row(
         children: <Widget>[
+
+          AnimatedOpacity(
+            opacity: controlsNotVisible ? 0.0 :1.0,
+            duration: _controlsConfiguration.controlsHideTime,
+            child: GestureDetector(
+              onTap: (){
+                widget.isBackArrowPressed.call();
+              },
+              child: Container(
+                child: Icon(Icons.arrow_back_ios, color: Colors.white,),
+              ),
+            ),
+          ),
+
           if (_controlsConfiguration.enableFullscreen)
-            _buildExpandButton(
-              backgroundColor,
-              iconColor,
-              barHeight,
-              iconSize,
-              buttonPadding,
-            )
-          else
-            const SizedBox(),
+            // _buildExpandButton(
+            //   backgroundColor,
+            //   iconColor,
+            //   barHeight,
+            //   iconSize,
+            //   buttonPadding,
+            // )
           const SizedBox(
             width: 4,
           ),

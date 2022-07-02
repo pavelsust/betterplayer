@@ -81,6 +81,9 @@ class _BetterPlayerListVideoPlayerState
       child: BetterPlayer(
         key: Key("${_getUniqueKey()}_player"),
         controller: _betterPlayerController!,
+        isBackArrowPressed: (){
+
+        },
       ),
     );
   }

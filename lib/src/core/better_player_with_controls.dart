@@ -12,8 +12,9 @@ import 'package:flutter/material.dart';
 
 class BetterPlayerWithControls extends StatefulWidget {
   final BetterPlayerController? controller;
+  final Function isBackArrowPressed;
 
-  const BetterPlayerWithControls({Key? key, this.controller}) : super(key: key);
+   BetterPlayerWithControls({Key? key, this.controller , required this.isBackArrowPressed}) : super(key: key);
 
   @override
   _BetterPlayerWithControlsState createState() =>
@@ -197,6 +198,7 @@ class _BetterPlayerWithControlsState extends State<BetterPlayerWithControls> {
     return BetterPlayerCupertinoControls(
       onControlsVisibilityChanged: onControlsVisibilityChanged,
       controlsConfiguration: controlsConfiguration,
+      isBackArrowPressed: widget.isBackArrowPressed,
     );
   }
 

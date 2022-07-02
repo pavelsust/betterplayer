@@ -46,7 +46,9 @@ class _HlsTracksPageState extends State<HlsTracksPage> {
           ),
           AspectRatio(
             aspectRatio: 16 / 9,
-            child: BetterPlayer(controller: _betterPlayerController),
+            child: BetterPlayer(controller: _betterPlayerController, isBackArrowPressed: (){
+              Navigator.pop(context);
+            },),
           ),
         ],
       ),

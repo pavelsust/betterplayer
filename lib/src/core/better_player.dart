@@ -10,30 +10,20 @@ import 'package:wakelock/wakelock.dart';
 
 ///Widget which uses provided controller to render video player.
 class BetterPlayer extends StatefulWidget {
-  const BetterPlayer({Key? key, required this.controller}) : super(key: key);
+  final Function isBackArrowPressed;
+  const BetterPlayer({Key? key, required this.controller , required this.isBackArrowPressed}) : super(key: key);
 
   factory BetterPlayer.network(
     String url, {
-    BetterPlayerConfiguration? betterPlayerConfiguration,
-  }) =>
+    BetterPlayerConfiguration? betterPlayerConfiguration}) =>
       BetterPlayer(
         controller: BetterPlayerController(
           betterPlayerConfiguration ?? const BetterPlayerConfiguration(),
           betterPlayerDataSource:
               BetterPlayerDataSource(BetterPlayerDataSourceType.network, url),
-        ),
-      );
+        ), isBackArrowPressed: (){
 
-  factory BetterPlayer.file(
-    String url, {
-    BetterPlayerConfiguration? betterPlayerConfiguration,
-  }) =>
-      BetterPlayer(
-        controller: BetterPlayerController(
-          betterPlayerConfiguration ?? const BetterPlayerConfiguration(),
-          betterPlayerDataSource:
-              BetterPlayerDataSource(BetterPlayerDataSourceType.file, url),
-        ),
+      },
       );
 
   final BetterPlayerController controller;
@@ -137,7 +127,9 @@ class _BetterPlayerState extends State<BetterPlayer>
         onFullScreenChanged();
         break;
       default:
-        setState(() {});
+        setState(() {
+
+        });
         break;
     }
   }
@@ -268,6 +260,7 @@ class _BetterPlayerState extends State<BetterPlayer>
           widget.controller.onPlayerVisibilityChanged(info.visibleFraction),
       child: BetterPlayerWithControls(
         controller: widget.controller,
+        isBackArrowPressed: widget.isBackArrowPressed,
       ),
     );
   }

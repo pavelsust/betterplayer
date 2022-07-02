@@ -50,6 +50,9 @@ class _ChangePlayerThemePageState extends State<ChangePlayerThemePage> {
             ),
             BetterPlayer(
               controller: _betterPlayerController,
+              isBackArrowPressed: (){
+
+              },
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,

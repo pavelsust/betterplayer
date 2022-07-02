@@ -49,6 +49,9 @@ class BetterPlayerPlaylistState extends State<BetterPlayerPlaylist> {
           BetterPlayerUtils.calculateAspectRatio(context),
       child: BetterPlayer(
         controller: _betterPlayerController!,
+        isBackArrowPressed: (){
+
+        },
       ),
     );
   }
